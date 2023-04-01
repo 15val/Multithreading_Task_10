@@ -4,17 +4,16 @@ import java.util.ListIterator;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Market extends Thread{
+public class Market{
     private AtomicBoolean isMarketingPossible;
     private AtomicInteger defaultIndex;
     private AtomicInteger index;
     private int dramaticDecreaseDelta = 25;
-    private List<Broker> brokers = new ArrayList<>();
 
-    public Market(AtomicInteger index, List<Broker> brokers){
+
+    public Market(AtomicInteger index){
         this.defaultIndex = index;
         this.index = index;
-        this.brokers.addAll(brokers);
         this.isMarketingPossible = new AtomicBoolean(true);
     }
 
@@ -46,18 +45,6 @@ public class Market extends Thread{
     }
 
 
-    public void run(){
-        ListIterator<Broker> iterator = brokers.listIterator();
-        Broker current;
-        try{
-            while (iterator.hasNext()){
-                Thread.sleep(50);
-                current = iterator.next();
-                current.start();
-            }
-        } catch (InterruptedException e) {
-            e.getMessage();
-        }
-    }
+
 
 }
