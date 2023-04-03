@@ -6,25 +6,17 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class Main {
     public static void main(String[] args) {
-        List<Action> firstCompanyList = new ArrayList<>();
-        for(int i = 0; i < 5; i++) {
-            firstCompanyList.add(new Action("FIRST", new AtomicInteger(500)));
-        }
-        List<Action> secondCompanyList = new ArrayList<>();
-        for(int i = 0; i < 5; i++) {
-            secondCompanyList.add(new Action("SECOND", new AtomicInteger(400)));
-        }
-        List<Action> thirdCompanyList = new ArrayList<>();
-        for(int i = 0; i < 5; i++) {
-            thirdCompanyList.add(new Action("THIRD", new AtomicInteger(300)));
-        }
+        Action first = new Action("FIRST", new AtomicInteger(500));
+        Action second = new Action("SECOND", new AtomicInteger(400));
+        Action third = new Action("THIRD", new AtomicInteger(300));
+
 
         Market market = new Market(new AtomicInteger(100));
 
         ReentrantLock locker = new ReentrantLock();
-        Broker firstBroker = new Broker(1, firstCompanyList, market, locker);
-        Broker secondBroker = new Broker(2, secondCompanyList, market, locker);
-        Broker thirdBroker = new Broker(3, thirdCompanyList, market, locker);
+        Broker firstBroker = new Broker(1, first, 5, market, locker);
+        Broker secondBroker = new Broker(2, second, 5, market, locker);
+        Broker thirdBroker = new Broker(3, third, 5, market, locker);
 
         List<Broker> brokers = new ArrayList<>();
         brokers.add(firstBroker);
